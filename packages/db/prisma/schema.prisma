@@ -14,23 +14,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id            String       @id @default(uuid())
-  email         String    @unique
+  id            String      @id  @default(uuid())
+  email         String      @unique
   name          String?
   emailVerified Boolean
   image         String?
   createdAt     DateTime
   updatedAt     DateTime
+  type          String @default("CUSTOMER")
+  followers     Follow[] @relation("UserFollowers")
+  following     Follow[] @relation("UserFollowing")
+  savedProducts SavedProduct[]
+  products      Product[]
   sessions      Session[]
   accounts      Account[]
-
   @@map("user")
 }
 
 model Session {
   id        String   @id
+  accountType AccountType @default(CUSTOMER)
   expiresAt DateTime
   token     String
   createdAt DateTime
@@ -73,3 +77,62 @@ model Verification {
 
   @@map("verification")
 }
+
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  price       Decimal
+  color       Color
+  image       String
+  type        ProductType
+  createdAt   DateTime
+  updatedAt   DateTime
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  savedProducts SavedProduct[]
+  @@map("product")
+}
+
+model SavedProduct {
+  id String @id @default(uuid())
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId String
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  @@map("saved_product")
+}
+
+model Follow {
+  id String @id @default(uuid())
+  followerId String
+  follower User @relation("UserFollowers", fields: [followerId], references: [id], onDelete: Cascade)
+  followingId String
+  following User @relation("UserFollowing", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@map("follow")
+}
+
+enum AccountType {
+  MANUFACTURER
+  CUSTOMER
+}
+
+enum Color {
+  RED
+  GREEN
+  BLUE
+  YELLOW
+  PURPLE
+  ORANGE
+  PINK
+  BROWN
+}
+
+enum ProductType {
+  TSHIRT
+  JEANS
+  SHIRT
+  OTHER
+}
+

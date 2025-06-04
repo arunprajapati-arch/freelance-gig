@@ -50,7 +50,7 @@ export default function SignIn() {
                     await signIn.social(
                     {
                       provider: "github",
-                      callbackURL: "/home"
+                      callbackURL: "/onboard"
                     },
                     {
                       onRequest: (ctx) => {

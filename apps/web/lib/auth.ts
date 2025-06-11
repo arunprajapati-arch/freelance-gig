@@ -1,5 +1,4 @@
 import { betterAuth } from "better-auth";
-import { customSession } from "better-auth/plugins";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { AccountType, prisma } from "@redb/db";
  
@@ -13,12 +12,4 @@ export const auth = betterAuth({
            clientSecret: process.env.GITHUB_CLIENT_SECRET as string, 
         }, 
     }, 
-    // session: {
-    //     additionalFields: {
-    //         accountType: {
-    //             type: "string",
-    //             defaultValue: "CUSTOMER"
-    //         }
-    //     }
-    // },
 });

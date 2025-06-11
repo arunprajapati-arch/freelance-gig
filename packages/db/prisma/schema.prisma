@@ -34,7 +34,6 @@ model User {
 
 model Session {
   id        String   @id
-  accountType AccountType @default(CUSTOMER)
   expiresAt DateTime
   token     String
   createdAt DateTime

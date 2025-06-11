@@ -1,16 +1,27 @@
-import { prisma } from "@redb/db";
-import SignIn from "@/components/sign-in";
+import LandingHeader from "@/components/LandingHeader";
+import LandingHero from "@/components/LandingHero";
+import LandingFeatures from "@/components/LandingFeatures";
+import LandingHowItWorks from "@/components/LandingHowItWorks";
+import LandingTestimonials from "@/components/LandingTestimonials";
+import LandingFooter from "@/components/LandingFooter";
 
-
-export default async function Home() {
-  await prisma.$connect();
-  console.log("Connected to database");
-
-  
+export default function Home() {
   return (
-    <div>
-      <h1>Hello World</h1>
-      <SignIn />
+    <div className="min-h-screen">
+      <LandingHeader />
+      <main>
+        <LandingHero />
+        <section id="features">
+          <LandingFeatures />
+        </section>
+        <section id="how-it-works">
+          <LandingHowItWorks />
+        </section>
+        <section id="testimonials">
+          <LandingTestimonials />
+        </section>
+      </main>
+      <LandingFooter />
     </div>
-  )
+  );
 }

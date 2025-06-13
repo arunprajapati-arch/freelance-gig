@@ -22,7 +22,7 @@ model User {
   image         String?
   createdAt     DateTime
   updatedAt     DateTime
-  type          String @default("CUSTOMER")
+  type          AccountType @default(CLIENT)
   followers     Follow[] @relation("UserFollowers")
   following     Follow[] @relation("UserFollowing")
   savedProducts SavedProduct[]
@@ -114,7 +114,7 @@ model Follow {
 
 enum AccountType {
   MANUFACTURER
-  CUSTOMER
+  CLIENT
 }
 
 enum Color {

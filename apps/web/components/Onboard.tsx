@@ -29,6 +29,8 @@ export default function OnboardClient({
   const [accountType, setAccountType] = useState<"MANUFACTURER" | "CLIENT" | null>(null);
   const [state, formAction, isPending] = useActionState(completeOnboarding, initialState);
 
+  //image upload is incorrect handle later
+
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;

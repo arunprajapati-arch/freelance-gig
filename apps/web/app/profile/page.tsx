@@ -1,4 +1,4 @@
-import { AppHeader } from "@/components/common";
+import AppHeader from "@/components/Appheader";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
@@ -17,8 +17,7 @@ export default async function ProfilePage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <AppHeader 
-        showSearch={false}
-        user={user}
+       
       />
       
       <div className="max-w-4xl mx-auto px-4 py-8">

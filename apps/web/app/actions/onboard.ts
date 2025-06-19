@@ -6,7 +6,7 @@ import { headers } from "next/headers"
 import { z } from "zod"
 
 
-
+//handle profile image later
 
 const onboardingSchema = z.object({
     displayName: z.string().min(4, {message: "Minimum 4 characters are required"}),

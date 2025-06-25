@@ -13,7 +13,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "SampleDekho - India's Leading Sample Marketplace",
+  title: "WholesaleDukaan - India's Leading Sample Marketplace",
   description: "Connect manufacturers with bulk buyers. Scale your business with trusted wholesale partnerships on India's premier B2B platform.",
 };
 
@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} bg-gray-100`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} bg-gray-100 light `}>
         {children}
         <Toaster />
       </body>

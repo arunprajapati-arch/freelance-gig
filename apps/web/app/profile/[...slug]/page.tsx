@@ -3,8 +3,6 @@ import ProfileInfo from "@/components/ProfileInfo";
 import FilterBar from "@/components/FilterBar";
 import ProductGrid from "@/components/ProductGrid";
 import AppHeader from "@/components/Appheader";
-import AddProductDialog from "@/components/product/AddProductDialog";
-
 
 type Props = {
   params: Promise<{
@@ -23,26 +21,28 @@ export default async function Profile({ params }: Props) {
   const user = {
     name: username,
     email: `${username}@example.com`,
-    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face"
+    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+    type: "manufacturer"
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative">
-      <AppHeader 
-        
-          />
-      <div className="w-full max-w-6xl pt-4 md:pt-8 pb-4 md:pb-12 px-4 md:px-6 lg:px-8 mx-auto flex flex-col items-center gap-4 md:gap-10">
-        <div className="w-full flex flex-col md:flex-row items-center justify-center md:justify-evenly gap-6 md:gap-12">
-          <ProfileInfo username={username} />
-          <div className="w-full md:w-auto">
-            <NewArrival />
+    <div className="min-h-screen flex flex-col gap-2 sm:gap-3 md:gap-4 bg-rose-900 py-2 sm:py-4 md:py-6 lg:py-8 ">
+      <AppHeader user={user} />
+      <div className="flex flex-col gap-6 sm:gap-8 md:gap-10 lg:gap-12 bg-stone-50 min-h-screen rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-4 md:p-6 lg:p-8 pt-4 sm:pt-6 md:pt-8 lg:pt-12 border border-stone-200 shadow-sm sm:shadow-md lg:shadow-lg sticky top-0">
+        <div className="w-full max-w-full sm:max-w-3xl md:max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto flex flex-col items-center gap-3 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10">
+          <div className="w-full flex flex-col lg:flex-row items-center justify-center lg:justify-evenly gap-4 sm:gap-6 md:gap-8 lg:gap-12">
+            <ProfileInfo username={username} />
+            <div className="w-full sm:w-auto">
+              <NewArrival />
+            </div>
+          </div>
+          <div className="w-full">
+            <FilterBar />
+          </div>
+          <div className="w-full">
+            <ProductGrid />
           </div>
         </div>
-        <FilterBar />
-        <ProductGrid />
-      </div>
-      <div className="w-full">
-      <AddProductDialog />
       </div>
     </div>
   );

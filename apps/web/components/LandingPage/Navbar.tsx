@@ -4,17 +4,21 @@ import { ArrowUpRight, ChevronRight, Home, LinkIcon, Store } from "lucide-react"
 
 export default function Navbar() {
   return (
-    <div className=" flex justify-between items-center px-8">
-        <div className="flex items-center gap-2">
-            <Store className="w-6 h-6" />
-            <h1 className="text-3xl font-bold tracking-tight">WholesaleDukaan</h1>
+    <div className="flex justify-between items-center px-2 sm:px-4 md:px-6 lg:px-8">
+        <div className="flex items-center gap-1.5 sm:gap-2">
+            <Store className="w-5 h-5 sm:w-6 sm:h-6 text-stone-100" />
+            <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold tracking-tight text-stone-100 truncate">
+                <span className="hidden sm:inline">WholesaleDukaan</span>
+                <span className="sm:hidden">WD</span>
+            </h1>
         </div>
-        <div className="flex items-center gap-6">
-            <Link href="/login" className="flex items-center  text-md font-medium cursor-pointer hover:underline">Login
-            <ArrowUpRight className=""  />
+        <div className="flex items-center gap-3 sm:gap-4 md:gap-6">
+            <Link href="/login" className="flex items-center text-sm sm:text-base md:text-lg font-medium cursor-pointer hover:underline text-stone-200 hover:text-stone-100">
+                Login
+                <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </Link>
-            <Button className="text-md px-6  font-semibold bg-orange-500 text-orange-100 shadow-md shadow-orange-100 cursor-pointer hover:bg-orange-600">Join
-            
+            <Button className="text-sm sm:text-base md:text-lg px-3 sm:px-4 md:px-6 py-2 font-semibold bg-stone-100 text-red-950 shadow-md shadow-stone-900/20 cursor-pointer hover:bg-stone-200">
+                Join
             </Button>
         </div>
     </div>

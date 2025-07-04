@@ -56,17 +56,18 @@ export default function AddProductDialog() {
 
 
   
-
+// flex items-center gap-2 px-4 py-2.5 bg-white hover:bg-gray-100 text-gray-800 rounded-lg font-semibold text-sm transition-colors duration-200 shadow-sm
 
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <div
-          className="p-4 py-5  flex items-center justify-center gap-2 fixed md:bottom-16 md:right-48 right-8 bottom-8 z-50 rounded-2xl bg-gradient-to-br from-white via-blue-50 to-purple-50 md:from-white md:via-blue-200 md:to-purple-300  border border-gray-200 shadow-lg cursor-pointer"
+          className="flex items-center justify-center gap-1.5 sm:gap-2 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 md:py-2.5 bg-white hover:bg-gray-100 text-gray-800 rounded-md sm:rounded-lg font-semibold text-xs sm:text-sm transition-colors duration-200 shadow-sm cursor-pointer"
         >
-          <PlusIcon className="w-4   h-4 " />
-          <span className="text-sm font-semibold text-gray-800">Add Product</span>
+          <PlusIcon className="w-3 h-3 sm:w-4 sm:h-4" />
+          <span className="text-xs sm:text-sm font-semibold text-gray-800 hidden xs:inline">Product</span>
+          <span className="text-xs sm:text-sm font-semibold text-gray-800 xs:hidden">+</span>
         </div>
       </DialogTrigger>
       <DialogContent className="max-h-[95vh] w-[95vw] max-w-[500px] sm:max-w-[600px] md:max-w-[800px] lg:max-w-[1000px] xl:max-w-[1200px] overflow-hidden p-0">
@@ -223,7 +224,7 @@ export default function AddProductDialog() {
               </Button>
               <Button
                 type="submit"
-                className="w-full sm:w-auto h-11 text-base font-medium bg-blue-600 hover:bg-blue-700"
+                className="w-full sm:w-auto h-11 text-base font-medium bg-red-900 hover:bg-red-800"
                 form="add-product-form"
               >
                 {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : "Add Product"}

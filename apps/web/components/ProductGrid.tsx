@@ -25,7 +25,7 @@ export default async function ProductGrid() {
           {products.map((product) => (
             <div
               key={product.id}
-              className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer transform hover:-translate-y-1 h-[280px] md:h-[320px] lg:h-[360px]"
+              className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer transform hover:-translate-y-1 h-[280px] md:h-[320px] lg:h-[360px] border border-stone-200"
             >
               <div className="relative w-full h-[65%] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
                 <Image
@@ -48,19 +48,19 @@ export default async function ProductGrid() {
                   {product.colors.map((color, idx) => (
                     <button
                       key={idx}
-                      className="w-5 h-5 rounded-full border-2 border-gray-200 hover:border-gray-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 cursor-pointer"
+                      className="w-5 h-5 rounded-full border-2 border-gray-200 hover:border-gray-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 cursor-pointer"
                       style={{ backgroundColor: color }}
                       aria-label={`Select ${color} color variant`}
                     />
                   ))}
                 </div>
-                <h3 className="text-xs md:text-sm font-semibold text-gray-800 mb-1 truncate group-hover:text-purple-600 transition-colors duration-200">
+                <h3 className="text-xs md:text-sm font-semibold text-gray-800 mb-1 truncate group-hover:text-red-900 transition-colors duration-200">
                   {product.name}
                 </h3>
                 <div className="flex items-center justify-between">
                   <p className="text-sm md:text-base font-bold text-gray-900">{product.price}</p>
                   <button 
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-full shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200 hover:border-gray-300 cursor-pointer"
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-full shadow-sm hover:shadow-md transition-all duration-200 border border-stone-200 hover:border-stone-300 cursor-pointer"
                     aria-label="Save product"
                   >
                     <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">

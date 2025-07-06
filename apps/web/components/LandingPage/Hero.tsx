@@ -6,7 +6,7 @@ import Testimonials from "./Testimonials";
 
 export default function Hero() {
     return (
-        <div className="flex flex-col gap-6 sm:gap-8 md:gap-10 lg:gap-12 bg-stone-50 min-h-screen rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-4 md:p-6 lg:p-8 pt-4 sm:pt-6 md:pt-8 lg:pt-12 border border-stone-200 shadow-sm sm:shadow-md lg:shadow-lg">
+        <div className="flex flex-col justify-center gap-6 sm:gap-8 md:gap-10 lg:gap-12 bg-stone-50 min-h-screen rounded-lg sm:rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8 pt-4 sm:pt-6 md:pt-8 lg:pt-12 border border-stone-200 shadow-sm sm:shadow-md lg:shadow-lg">
             {/* <h1>Hero</h1> */}
 
             <div className="flex flex-col gap-2 sm:gap-3 md:gap-4 justify-center items-center text-center px-2 sm:px-4">
@@ -19,17 +19,17 @@ export default function Hero() {
                 </p>
                 <div className="flex flex-col gap-3 sm:gap-4 justify-center items-center">
                     <Button className="text-sm sm:text-base md:text-lg p-3 sm:p-4 md:p-5 lg:p-6 flex items-center gap-2 rounded-lg font-semibold bg-red-900 text-red-100 shadow-md shadow-red-900/20 cursor-pointer hover:bg-red-800 tracking-tighter">
-                        <span className="hidden sm:inline">Join Wholesale Dukaan</span>
-                        <span className="sm:hidden">Join WD</span>
+                        <span className=" sm:inline">Join Wholesale Dukaan</span>
+                        {/* <span className="sm:hidden">Join WD</span> */}
                         <ArrowUpRight className="w-4 h-4" />
                     </Button>
                     <span className="text-xs sm:text-sm text-gray-400">500+ Members joined in last 30 days</span>
                 </div>
             </div>
             
-            <div className="flex flex-col gap-8 sm:gap-12 md:gap-16 items-center w-full h-full">
+            <div className="flex flex-col gap-8 sm:gap-12 md:gap-16  items-center w-full h-full">
                 {/* Features Section */}
-                <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 justify-center items-center max-w-full sm:max-w-2xl md:max-w-3xl lg:max-w-4xl px-2 sm:px-4">
+                <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-6 justify-center items-center max-w-full sm:max-w-2xl md:max-w-3xl lg:max-w-5xl px-2 sm:px-4">
                     <div className="flex items-center gap-3 sm:gap-4 rounded-lg p-3 sm:p-4 min-w-0">
                         <StoreIcon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-red-900 flex-shrink-0" />
                         <div className="min-w-0">
@@ -40,8 +40,8 @@ export default function Hero() {
                     <div className="flex items-center gap-3 sm:gap-4 rounded-lg p-3 sm:p-4 min-w-0">
                         <ShoppingCartIcon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-red-900 flex-shrink-0" />
                         <div className="min-w-0">
-                            <h3 className="text-sm sm:text-base font-semibold text-gray-800 truncate">Chat with Sellers</h3>
-                            <p className="text-xs sm:text-sm text-gray-600">Connect with sellers directly</p>
+                            <h3 className="text-sm sm:text-base font-semibold text-gray-800 truncate">Connect with Sellers</h3>
+                            <p className="text-xs sm:text-sm text-gray-600">Get direct access to sellers</p>
                         </div>
                     </div>
                     <div className="flex items-center gap-3 sm:gap-4 rounded-lg p-3 sm:p-4 min-w-0">

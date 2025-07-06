@@ -24,7 +24,7 @@ export default async function Home() {
     };
 
     return (
-        <div className="min-h-screen flex flex-col gap-4 bg-rose-900  py-8 pb-0">
+        <div className="min-h-screen flex flex-col justify-center  gap-2 bg-rose-900  pt-4 pb-0">
             <AppHeader user={user} />
             <div className="flex flex-col gap-12 bg-stone-50 min-h-screen rounded-xl p-4 md:pt-12 border border-stone-200 shadow-lg relative overflow-hidden">
                 {/* Background decorative elements */}

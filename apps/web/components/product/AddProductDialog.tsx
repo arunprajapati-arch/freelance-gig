@@ -54,24 +54,19 @@ export default function AddProductDialog() {
     setImagePreview(null)
   }
 
-
-  
-// flex items-center gap-2 px-4 py-2.5 bg-white hover:bg-gray-100 text-gray-800 rounded-lg font-semibold text-sm transition-colors duration-200 shadow-sm
-
-
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <div
-          className="flex items-center justify-center gap-1.5 sm:gap-2 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 md:py-2.5 bg-white hover:bg-gray-100 text-gray-800 rounded-md sm:rounded-lg font-semibold text-xs sm:text-sm transition-colors duration-200 shadow-sm cursor-pointer"
+          className="flex items-center justify-center gap-1.5 sm:gap-2 px-3 md:px-4 py-1.5 sm:py-2 md:py-2.5 bg-stone-50 rounded-md sm:rounded-lg font-semibold text-xs sm:text-sm transition-colors duration-200 shadow-sm cursor-pointer border border-stone-600"
         >
-          <PlusIcon className="w-3 h-3 sm:w-4 sm:h-4" />
-          <span className="text-xs sm:text-sm font-semibold text-gray-800 hidden xs:inline">Product</span>
-          <span className="text-xs sm:text-sm font-semibold text-gray-800 xs:hidden">+</span>
+          <PlusIcon className="w-5 h-5 sm:w-4 sm:h-4" />
+          <span className="text-xs sm:text-sm font-semibold hidden sm:inline">Product</span>
+          
         </div>
       </DialogTrigger>
-      <DialogContent className="max-h-[95vh] w-[95vw] max-w-[500px] sm:max-w-[600px] md:max-w-[800px] lg:max-w-[1000px] xl:max-w-[1200px] overflow-hidden p-0">
-        <div className="flex max-h-[95vh] flex-col">
+      <DialogContent className="max-h-[95vh] w-screen sm:max-h-[95vh] sm:w-[95vw] sm:max-w-[600px] md:max-w-[800px] lg:max-w-[1000px] xl:max-w-[1200px] overflow-hidden p-0">
+        <div className="flex max-h-[95vh] sm:max-h-[95vh] flex-col">
           <DialogHeader className="px-4 pt-6 sm:px-6 lg:px-8">
             <DialogTitle className="text-lg sm:text-xl lg:text-2xl">Add New Product</DialogTitle>
             <DialogDescription className="text-sm sm:text-base">

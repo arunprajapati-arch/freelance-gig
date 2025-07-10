@@ -5,8 +5,8 @@ import Link from "next/link";
 import Testimonials from "./Testimonials";
 
 export default function Hero() {
-    return (
-        <div className="flex flex-col justify-center gap-6 sm:gap-8 md:gap-10 lg:gap-12 bg-stone-50 min-h-screen rounded-lg sm:rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8 pt-4 sm:pt-6 md:pt-8 lg:pt-12 border border-stone-200 shadow-sm sm:shadow-md lg:shadow-lg">
+    return ( <div className="flex flex-col justify-center gap-6 sm:gap-8 md:gap-10 lg:gap-12 bg-stone-50 min-h-screen rounded-lg sm:rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8 pt-4 sm:pt-6 md:pt-8 lg:pt-12 border border-stone-200 shadow-sm sm:shadow-md lg:shadow-lg">
+       
             {/* <h1>Hero</h1> */}
 
             <div className="flex flex-col gap-2 sm:gap-3 md:gap-4 justify-center items-center text-center px-2 sm:px-4">

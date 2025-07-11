@@ -23,7 +23,7 @@ export default async function Page() {
     // }
 
     return(
-        <div className="flex flex-col  md:gap-4  md:min-h-screen bg-rose-900 md:p-4 md:px-8">
+        <div className="flex flex-col  md:gap-4  md:min-h-screen  bg-gradient-to-b from-rose-900 to-rose-950 md:p-4 md:px-8">
             {/* Header with Simple Navbar */}
             <div className="hidden md:block">
            <Navbar />

@@ -5,33 +5,51 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter }
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
-import { Loader2, Mail, Lock } from "lucide-react";
-import { signIn } from "@/lib/auth-client";
+import { Loader2, Mail, Lock, User } from "lucide-react";
+import { signUp } from "@/lib/auth-client";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-export default function SignIn() {
+export default function SignUp() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
+  const [agreeToTerms, setAgreeToTerms] = useState(false);
 
   return (
-    <div className="min-h-screen flex items-start max-md:pt-24 md:items-center justify-center bg-gradient-to-b from-rose-900 to-rose-950 p-2 sm:p-4">
-      <Card className="w-full max-w-md sm:max-w-xl  bg-stone-50 border border-stone-200 shadow-lg sm:shadow-xl rounded-lg sm:rounded-xl">
+    <div className="min-h-screen flex items-start max-md:pt-10 md:items-center justify-center bg-gradient-to-b from-rose-900 to-rose-950 p-2 sm:p-4">
+      <Card className="w-full max-w-md sm:max-w-xl bg-stone-50 border border-stone-200 shadow-lg sm:shadow-xl rounded-lg sm:rounded-xl">
         <CardHeader className="space-y-1.5 sm:space-y-2 p-3 sm:p-4 md:p-6">
           <div className="flex flex-col items-center justify-center text-center">
             <CardTitle className="text-xl lg:text-3xl font-semibold text-red-900 tracking-tight leading-tight">
-              Welcome to Wholesale Dukaan
+              Join Wholesale Dukaan
             </CardTitle>
           </div>
           <CardDescription className="text-xs sm:text-sm text-gray-600 text-center leading-relaxed">
-            Enter your details to access your account
+            Create your account to start your wholesale journey
           </CardDescription>
         </CardHeader>
         
         <CardContent className="space-y-2.5 sm:space-y-3 p-3 sm:p-4 md:p-6 pt-0">
           <div className="space-y-2 sm:space-y-2.5">
+            <div className="space-y-1">
+              <Label htmlFor="name" className="text-xs sm:text-sm font-medium text-gray-800 flex items-center gap-1.5">
+                <User className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-red-900" />
+                Full Name
+              </Label>
+              <input
+                id="name"
+                type="text"
+                placeholder="Enter your full name"
+                required
+                className="w-full h-9 sm:h-10 md:h-11 bg-white border border-stone-300 focus:border-red-900 focus:ring-2 focus:ring-red-900/20 focus:outline-none rounded-md sm:rounded-lg text-sm text-gray-800 placeholder:text-gray-400 px-3 py-2"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+              />
+            </div>
+
             <div className="space-y-1">
               <Label htmlFor="email" className="text-xs sm:text-sm font-medium text-gray-800 flex items-center gap-1.5">
                 <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-red-900" />
@@ -49,66 +67,77 @@ export default function SignIn() {
             </div>
 
             <div className="space-y-1">
-              <div className="flex items-center justify-between">
-                <Label htmlFor="password" className="text-xs sm:text-sm font-medium text-gray-800 flex items-center gap-1.5">
-                  <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-red-900" />
-                  Password
-                </Label>
-                <Link
-                  href="#"
-                  className="text-xs sm:text-sm text-red-900 hover:text-red-800 font-medium underline underline-offset-2 transition-colors"
-                >
-                  Need help?
-                </Link>
-              </div>
+              <Label htmlFor="password" className="text-xs sm:text-sm font-medium text-gray-800 flex items-center gap-1.5">
+                <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-red-900" />
+                Password
+              </Label>
               <input
                 id="password"
                 type="password"
-                placeholder="Enter your password"
-                autoComplete="current-password"
+                placeholder="Create a password"
+                autoComplete="new-password"
                 className="w-full h-9 sm:h-10 md:h-11 bg-white border border-stone-300 focus:border-red-900 focus:ring-2 focus:ring-red-900/20 focus:outline-none rounded-md sm:rounded-lg text-sm text-gray-800 placeholder:text-gray-400 px-3 py-2"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
+            <div className="space-y-1">
+              <Label htmlFor="confirmPassword" className="text-xs sm:text-sm font-medium text-gray-800 flex items-center gap-1.5">
+                <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-red-900" />
+                Confirm Password
+              </Label>
+              <input
+                id="confirmPassword"
+                type="password"
+                placeholder="Confirm your password"
+                autoComplete="new-password"
+                className="w-full h-9 sm:h-10 md:h-11 bg-white border border-stone-300 focus:border-red-900 focus:ring-2 focus:ring-red-900/20 focus:outline-none rounded-md sm:rounded-lg text-sm text-gray-800 placeholder:text-gray-400 px-3 py-2"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </div>
+
             <div className="flex items-center space-x-2">
               <Checkbox
-                id="remember"
+                id="terms"
                 className="border-stone-300 data-[state=checked]:bg-red-900 data-[state=checked]:border-red-900"
-                checked={rememberMe}
-                onCheckedChange={(checked) => setRememberMe(checked === true)}
+                checked={agreeToTerms}
+                onCheckedChange={(checked) => setAgreeToTerms(checked === true)}
               />
-              <Label htmlFor="remember" className="text-xs sm:text-sm text-gray-700 font-medium cursor-pointer">
-                Keep me logged in
+              <Label htmlFor="terms" className="text-xs sm:text-sm text-gray-700 font-medium cursor-pointer">
+                I agree to the{" "}
+                <Link href="/terms" className="text-red-900 hover:text-red-800 underline underline-offset-2">
+                  Terms of Service
+                </Link>{" "}
+                and{" "}
+                <Link href="/privacy" className="text-red-900 hover:text-red-800 underline underline-offset-2">
+                  Privacy Policy
+                </Link>
               </Label>
             </div>
 
             <Button
               type="submit"
               className="w-full h-9 sm:h-10 md:h-11 bg-gradient-to-b from-rose-700 to-rose-900 hover:from-rose-800 hover:to-rose-950 text-rose-100 font-semibold rounded-md sm:rounded-lg shadow-md shadow-rose-900/20 transition-all duration-300 tracking-tight text-sm"
-              disabled={loading}
+            //   disabled={loading || !agreeToTerms}
               onClick={async () => {
-                await signIn.email(
-                  {
-                    email,
-                    password
-                  },
-                  {
-                    onRequest: (ctx) => {
-                      setLoading(true);
-                    },
-                    onResponse: (ctx) => {
-                      setLoading(false);
-                    },
-                  },
-                );
+                if (password !== confirmPassword) {
+                  alert("Passwords don't match!");
+                  return;
+                }
+                // Add your signup logic here
+                setLoading(true);
+                // Simulate API call
+                setTimeout(() => {
+                  setLoading(false);
+                }, 2000);
               }}
             >
               {loading ? (
                 <Loader2 size={16} className="animate-spin" />
               ) : (
-                "Continue to Dashboard"
+                "Create Your Account"
               )}
             </Button>
 
@@ -127,20 +156,11 @@ export default function SignIn() {
                 className="w-full h-9 sm:h-10 md:h-11 bg-white border-stone-300 hover:bg-stone-50 hover:border-red-900/30 text-gray-800 font-medium rounded-md sm:rounded-lg transition-all duration-300 text-sm"
                 disabled={loading}
                 onClick={async () => {
-                  await signIn.social(
-                    {
-                      provider: "google",
-                      callbackURL: "/dashboard"
-                    },
-                    {
-                      onRequest: (ctx) => {
-                        setLoading(true);
-                      },
-                      onResponse: (ctx) => {
-                        setLoading(false);
-                      },
-                    },
-                  );
+                  // Add your Google signup logic here
+                  setLoading(true);
+                  setTimeout(() => {
+                    setLoading(false);
+                  }, 2000);
                 }}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 262" className="mr-2">
@@ -157,20 +177,11 @@ export default function SignIn() {
                 className="w-full h-9 sm:h-10 md:h-11 bg-white border-stone-300 hover:bg-stone-50 hover:border-red-900/30 text-gray-800 font-medium rounded-md sm:rounded-lg transition-all duration-300 text-sm"
                 disabled={loading}
                 onClick={async () => {
-                  await signIn.social(
-                    {
-                      provider: "facebook",
-                      callbackURL: "/dashboard"
-                    },
-                    {
-                      onRequest: (ctx) => {
-                        setLoading(true);
-                      },
-                      onResponse: (ctx) => {
-                        setLoading(false);
-                      },
-                    },
-                  );
+                  // Add your Facebook signup logic here
+                  setLoading(true);
+                  setTimeout(() => {
+                    setLoading(false);
+                  }, 2000);
                 }}
               >
                 <svg
@@ -193,13 +204,13 @@ export default function SignIn() {
         
         <CardFooter className="p-3 sm:p-4 md:p-6 pt-0">
           <p className="text-xs sm:text-sm text-gray-600 text-center w-full">
-            Don't have an account?{" "}
-            <Link href="/signup" className="text-red-900 hover:text-red-800 font-semibold underline underline-offset-2 transition-colors">
-              Create one here
+            Already have an account?{" "}
+            <Link href="/signin" className="text-red-900 hover:text-red-800 font-semibold underline underline-offset-2 transition-colors">
+              Sign in here
             </Link>
           </p>
         </CardFooter>
       </Card>
     </div>
   );
-}
+} 

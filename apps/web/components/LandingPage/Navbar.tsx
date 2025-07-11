@@ -18,12 +18,14 @@ export default function Navbar() {
               
                 
               
-                <Link href="/login" className="flex items-center text-sm sm:text-base md:text-lg font-medium cursor-pointer hover:underline text-stone-200 hover:text-stone-100">
+                <Link href="/signin" className="flex items-center text-sm sm:text-base md:text-lg font-medium cursor-pointer hover:underline text-stone-200 hover:text-stone-100">
                     Login
                     <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </Link>
-                <Button className="hidden sm:flex text-sm sm:text-base md:text-lg px-4 md:px-6 py-1 font-semibold bg-stone-100 text-red-950 shadow-md shadow-stone-900/20 cursor-pointer hover:bg-stone-200">
-                    Join
+                <Button asChild className="hidden sm:flex text-sm sm:text-base md:text-lg px-4 md:px-8 py-1 font-semibold bg-gradient-to-b from-stone-50 to-stone-300 text-red-950 shadow-md shadow-stone-900/20 cursor-pointer hover:opacity-95 transition-all duration-300">
+                    <Link href="/signup">
+                        Join
+                    </Link>
                 </Button>
             </div>
         </div>

@@ -11,16 +11,17 @@ export default function Hero() {
 
             <div className="flex flex-col gap-2 sm:gap-3 md:gap-4 justify-center items-center text-center px-2 sm:px-4">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl tracking-tighter leading-tight max-w-5xl">
-                    The Best Place to Connect in
-                    <span className="text-red-900 block font-semibold tracking-tight">Wholesale Clothing</span>
+                    The Best Place to Connect with
+                    <span className="text-red-900 block font-semibold tracking-tight">Wholesale Markets</span>
                 </h1>
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto mb-4 sm:mb-6 md:mb-8 leading-relaxed text-center">
                     A Platform That Brings <span className="text-red-900 font-semibold">Wholesale Buyers</span> and <span className="text-red-900 font-semibold">Makers</span> Together
                 </p>
                 <div className="flex flex-col gap-3 sm:gap-4 justify-center items-center">
-                    <Button className="text-sm sm:text-base md:text-lg p-3 sm:p-4 md:p-5 lg:p-6 flex items-center gap-2 rounded-lg font-semibold bg-red-900 text-red-100 shadow-md shadow-red-900/20 cursor-pointer hover:bg-red-800 tracking-tighter">
-                        <span className=" sm:inline">Join Wholesale Dukaan</span>
-                        {/* <span className="sm:hidden">Join WD</span> */}
+                    <Button  className="text-sm sm:text-base md:text-lg p-3 sm:p-4 md:p-5 lg:p-6 flex items-center gap-2 rounded-lg font-semibold bg-gradient-to-b from-rose-700 to-rose-900 text-rose-100 shadow-md shadow-rose-900/20 cursor-pointer hover:opacity-95 transition-all duration-300 tracking-tighter">
+                        <Link href="/signup">
+                            <span className=" sm:inline">Join Wholesale Dukaan</span>
+                        </Link>
                         <ArrowUpRight className="w-4 h-4" />
                     </Button>
                     <span className="text-xs sm:text-sm text-gray-400">500+ Members joined in last 30 days</span>

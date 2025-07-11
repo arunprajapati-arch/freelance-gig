@@ -1,6 +1,7 @@
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+"use client";
+import { authClient } from "@/lib/auth-client";
 import AppHeader from "@/components/Appheader";
+import {Suspense, lazy} from "react";
 
 import { 
   ManufacturerStories, 
@@ -8,13 +9,14 @@ import {
   subscribedManufacturers,
   featuredProducts
 } from "@/components/home";
-import ProductGrid from "@/components/ProductGrid";
 
-export default async function Home() {
-    const session = await auth.api.getSession({
-        headers: await headers()
-    });
+import ProfileInfo from "@/components/ProfileInfo";
+import NewArrivals from "@/components/NewArrival";
 
+const ProductGrid = lazy(() => import("@/components/ProductGrid"));
+
+export default  function Home() {
+    const {data: session, isPending, error} = authClient.useSession();
     // Mock user data - replace with actual session data
     const user = {
         name: "John Doe",
@@ -26,18 +28,17 @@ export default async function Home() {
     return (
         <div className="min-h-screen flex flex-col justify-center  gap-2 bg-rose-900  pt-4 pb-0">
             <AppHeader user={user} />
-            <div className="flex flex-col gap-12 bg-stone-50 min-h-screen rounded-xl p-4 md:pt-12 border border-stone-200 shadow-lg relative overflow-hidden">
-                {/* Background decorative elements */}
-                {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    <div className="absolute -top-40 -right-40 w-80 h-80 bg-red-100 rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-pulse"></div>
-                    <div className="absolute top-1/3 -left-32 w-64 h-64 bg-rose-100 rounded-full mix-blend-multiply filter blur-xl opacity-40 animate-pulse"></div>
-                    <div className="absolute -bottom-32 left-1/3 w-72 h-72 bg-stone-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse"></div>
-                    <div className="absolute top-1/4 right-1/4 w-48 h-48 bg-red-50 rounded-full mix-blend-multiply filter blur-xl opacity-35 animate-pulse"></div>
-                </div> */}
+            <div className="flex flex-col gap-12 items-center justify-center bg-stone-50 min-h-screen rounded-xl p-4 md:pt-12 border border-stone-200 shadow-lg relative overflow-hidden">
                 
-                <div className="relative z-10">
-                    <div className="max-w-4xl mx-auto">
-                        {/* <ManufacturerStories manufacturers={subscribedManufacturers} /> */}
+                
+                <div className="relative z-10 w-full">
+                    <div className="w-full  flex flex-col gap-4 items-center justify-center border border-red-500">
+                        <div className="w-full max-w-7xl flex items-center justify-evenly gap-4">
+                            <ProfileInfo username={user.name} />
+                            <NewArrivals />
+                        </div>
+                        
+                        <ManufacturerStories manufacturers={subscribedManufacturers} />
                         {/* <FeaturedProducts products={featuredProducts} /> */}
                         <ProductGrid />
                     </div>

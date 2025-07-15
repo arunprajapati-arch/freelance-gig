@@ -1,8 +1,9 @@
 import NewArrival from "@/components/NewArrival";
 import ProfileInfo from "@/components/ProfileInfo";
 import FilterBar from "@/components/FilterBar";
-import ProductGrid from "@/components/ProductGrid";
+import ProductGrid from "@/components/home/ProductGrid";
 import AppHeader from "@/components/Appheader";
+import ProfileProductGrid from "@/components/ProfilePage/ProfileProductGrid";
 
 type Props = {
   params: Promise<{
@@ -18,12 +19,7 @@ export default async function Profile({ params }: Props) {
   }
 
   // Mock user data - replace with actual user data based on username
-  const user = {
-    name: username,
-    email: `${username}@example.com`,
-    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
-    type: "manufacturer"
-  };
+
 
   return (
     <div className="min-h-screen flex flex-col gap-2 sm:gap-3 md:gap-4 bg-rose-900 pt-4 pb-0 ">
@@ -40,7 +36,7 @@ export default async function Profile({ params }: Props) {
             <FilterBar />
           </div>
           <div className="w-full">
-            <ProductGrid />
+            <ProfileProductGrid />
           </div>
         </div>
       </div>

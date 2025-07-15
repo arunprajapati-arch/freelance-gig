@@ -1,106 +1,120 @@
 "use client";
-import { CheckCircle, ChevronLeft, ChevronRight } from "lucide-react";
-import { Manufacturer } from "./types";
-import { useRef, useState, useEffect } from "react";
+import { User } from "@redb/db";
+import { useState, useEffect } from "react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 
-interface ManufacturerStoriesProps {
-  manufacturers: Manufacturer[];
+type ManufacturerStoriesProps = {
+  setSelectedManufacturer: (manufacturer: User) => void;
+  manufacturers: User[];
 }
 
-export default function ManufacturerStories({ manufacturers }: ManufacturerStoriesProps) {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [showLeftButton, setShowLeftButton] = useState(false);
-  const [showRightButton, setShowRightButton] = useState(true);
+export default function ManufacturerStories({ setSelectedManufacturer, manufacturers }: ManufacturerStoriesProps) {
+  const [currentSelectedManufacturer, setCurrentSelectedManufacturer] = useState<string | null>(null);
 
-  const checkScroll = () => {
-    if (scrollContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-      setShowLeftButton(scrollLeft > 0);
-      setShowRightButton(scrollLeft < scrollWidth - clientWidth - 10);
-    }
-  };
-
+  // Set first manufacturer as default
   useEffect(() => {
-    const scrollContainer = scrollContainerRef.current;
-    if (scrollContainer) {
-      checkScroll();
-      scrollContainer.addEventListener('scroll', checkScroll);
-      window.addEventListener('resize', checkScroll);
-    }
-    return () => {
-      if (scrollContainer) {
-        scrollContainer.removeEventListener('scroll', checkScroll);
-        window.removeEventListener('resize', checkScroll);
+    if (manufacturers.length > 0 && !currentSelectedManufacturer) {
+      const firstManufacturer = manufacturers[0];
+      if (firstManufacturer) {
+        setCurrentSelectedManufacturer(firstManufacturer.id.toString());
+        setSelectedManufacturer(firstManufacturer);
       }
-    };
-  }, []);
-
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = 200;
-      const currentScroll = scrollContainerRef.current.scrollLeft;
-      const newScroll = direction === 'left' 
-        ? currentScroll - scrollAmount 
-        : currentScroll + scrollAmount;
-      
-      scrollContainerRef.current.scrollTo({
-        left: newScroll,
-        behavior: 'smooth'
-      });
     }
-  };
+  }, [manufacturers, currentSelectedManufacturer, setSelectedManufacturer]);
+
+  const handleManufacturerClick = (manufacturer: User) => {
+    const manufacturerId = manufacturer.id.toString();
+    setSelectedManufacturer(manufacturer);
+    setCurrentSelectedManufacturer(manufacturerId);
+  }
 
   return (
-    <div className="py-4 relative">
-      <div 
-        ref={scrollContainerRef}
-        className="flex items-center justify-start gap-5 overflow-x-auto scrollbar-hide rounded-lg"
-      >
-        {manufacturers.map((manufacturer) => (
-          <div key={manufacturer.id} className="flex-shrink-0 text-center ml-2">
-            <div className="relative mb-3">
-              <div className={`w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-gradient-to-tr ${manufacturer.gradient} p-0.5`}>
-                <div className="w-full h-full rounded-full bg-white p-0.5">
-                  <div className="w-full h-full rounded-full bg-gray-100 flex items-center justify-center overflow-hidden">
-                    <span className="text-lg sm:text-2xl font-semibold text-gray-600">
-                      {manufacturer.name.charAt(0)}
-                    </span>
+    <div className="w-full md:w-auto py-4">
+      <div className="  px-4">
+        <Carousel
+          opts={{
+            align: "center",
+            loop: false,
+          }}
+          className="  "
+        >
+          <CarouselContent className="-ml-2 md:-ml-4">
+            {manufacturers.map((manufacturer, index) => {
+              const isSelected = currentSelectedManufacturer === manufacturer.id.toString();
+              return (
+                <CarouselItem key={index} className="pl-2 md:pl-4 basis-auto">
+                  <div 
+                    onClick={() => handleManufacturerClick(manufacturer)} 
+                    className="flex-none text-center cursor-pointer"
+                  >
+                    <div className="relative mb-1">
+                      {/* Instagram-style gradient border */}
+                      <div className={`w-16 h-16 rounded-full p-0.5 transition-all duration-300 ${
+                        isSelected 
+                          ? 'bg-gradient-to-tr from-purple-500 via-red-500 to-yellow-500' 
+                          : 'bg-gradient-to-tr from-gray-300 to-gray-400'
+                      }`}>
+                        <div className="w-full h-full rounded-full bg-white p-0.5">
+                          <div className="w-full h-full rounded-full bg-gray-100 flex items-center justify-center overflow-hidden">
+                            <span className="text-lg font-bold text-gray-700">
+                              {manufacturer.name?.charAt(0)?.toUpperCase() || 'M'}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Name below */}
+                    <div className="w-16">
+                      <p className="text-xs text-gray-700 truncate font-medium">
+                        {manufacturer.name || 'Unknown'}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </div>
-              {manufacturer.verified && (
-                <div className="absolute -bottom-1 -right-1 w-4 h-4 sm:w-6 sm:h-6 bg-blue-500 rounded-full flex items-center justify-center border-2 border-white">
-                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-white fill-current" />
-                </div>
-              )}
-            </div>
-            <div className="w-14 sm:w-20">
-              <p className="text-xs sm:text-sm text-gray-900 font-medium truncate">{manufacturer.name}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-      
-      {/* Navigation buttons - only visible on larger screens */}
-      <div className="hidden md:block">
-        {showLeftButton && (
-          <button
-            onClick={() => scroll('left')}
-            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg z-10"
-            aria-label="Scroll left"
-          >
-            <ChevronLeft className="w-6 h-6 text-gray-600" />
-          </button>
-        )}
-        {showRightButton && (
-          <button
-            onClick={() => scroll('right')}
-            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg z-10"
-            aria-label="Scroll right"
-          >
-            <ChevronRight className="w-6 h-6 text-gray-600" />
-          </button>
-        )}
+                </CarouselItem>
+              );
+            })}
+              {manufacturers.map((manufacturer, index) => {
+              const isSelected = currentSelectedManufacturer === manufacturer.id.toString();
+              return (
+                <CarouselItem key={index} className="pl-2 md:pl-4 basis-auto">
+                  <div 
+                    onClick={() => handleManufacturerClick(manufacturer)} 
+                    className="flex-none text-center cursor-pointer"
+                  >
+                    <div className="relative mb-1">
+                      {/* Instagram-style gradient border */}
+                      <div className={`w-16 h-16 rounded-full p-0.5 transition-all duration-300 ${
+                        isSelected 
+                          ? 'bg-gradient-to-tr from-purple-500 via-red-500 to-yellow-500' 
+                          : 'bg-gradient-to-tr from-gray-300 to-gray-400'
+                      }`}>
+                        <div className="w-full h-full rounded-full bg-white p-0.5">
+                          <div className="w-full h-full rounded-full bg-gray-100 flex items-center justify-center overflow-hidden">
+                            <span className="text-lg font-bold text-gray-700">
+                              {manufacturer.name?.charAt(0)?.toUpperCase() || 'M'}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Name below */}
+                    <div className="w-16">
+                      <p className="text-xs text-gray-700 truncate font-medium">
+                        {manufacturer.name || 'Unknown'}
+                      </p>
+                    </div>
+                  </div>
+                </CarouselItem>
+              );
+            })}
+          </CarouselContent>
+        </Carousel>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import { headers } from "next/headers";
 import { z } from "zod";
 
 export async function addProduct(
-    currentState: {success: boolean, message: string},
+    currentState:  {success: boolean, message: string} | null,
     formData: FormData
 ):Promise<{success: boolean, message: string}> {
 

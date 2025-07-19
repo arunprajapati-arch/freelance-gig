@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { User } from "@redb/db";
 
 interface ProfileInfoProps {
-  manufacturer: User | null;
+  manufacturer: User 
 }
 
 export default function ProfileInfo({ manufacturer }: ProfileInfoProps) {

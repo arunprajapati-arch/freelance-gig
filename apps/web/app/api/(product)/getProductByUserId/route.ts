@@ -15,7 +15,8 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
     const {searchParams} = new URL(req.url)
 
-    const userId = searchParams.get("userId")
+    const userId = searchParams.get("userId");
+    const skip = searchParams.get("skip");
 
     if(!userId) {
         return NextResponse.json({error: "Missing required field userId"}, {status: 400})
@@ -25,8 +26,14 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
         const products = await prisma.product.findMany({
             where: {
                 userId
+            },
+            skip: skip ? parseInt(skip) : 0,    
+            take: 12,
+            orderBy: {
+                createdAt: 'desc'
             }
         })
+        console.log(products);
 
         return NextResponse.json({products:products}, {status: 200})
     } catch (error) {

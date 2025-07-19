@@ -92,9 +92,10 @@ try {
                 type: data.accountType as AccountType,
             }
         })
+        
         return {
             success: true,
-            message: "User updated successfully",
+            message: "Profile completed successfully!",
         }
         
     } catch (error) {

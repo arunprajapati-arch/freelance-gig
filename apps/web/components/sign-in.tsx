@@ -131,7 +131,7 @@ export default function SignIn() {
                   await signIn.social(
                     {
                       provider: "github",
-                      callbackURL: "/home"
+                      callbackURL: "/api/authCallback/callback"
                     },
                     {
                       onRequest: (ctx) => {
@@ -161,7 +161,7 @@ export default function SignIn() {
                   await signIn.social(
                     {
                       provider: "google",
-                      callbackURL: "/dashboard"
+                      callbackURL: "/api/authCallback/callback"
                     },
                     {
                       onRequest: (ctx) => {
@@ -191,7 +191,7 @@ export default function SignIn() {
                   await signIn.social(
                     {
                       provider: "facebook",
-                      callbackURL: "/dashboard"
+                      callbackURL: "/api/authCallback/callback"
                     },
                     {
                       onRequest: (ctx) => {

@@ -5,10 +5,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Store, Search } from "lucide-react";
 import { useState } from "react";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
-import { User } from "@redb/db";
+import { AccountType } from "@redb/db";
 
 
-export default function AppHeader({ user }: { user: User }) {
+export default function AppHeader({ username, image, name, type }: { username: string, image: string, name: string, type: AccountType }) {
     const [isSearchExpanded, setIsSearchExpanded] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     // const {data: session, isPending, error} = authClient.useSession();
@@ -103,7 +103,7 @@ export default function AppHeader({ user }: { user: User }) {
                 </div>
 
                 {/* Add Product Dialog for manufacturers - now visible on all screen sizes */}
-                {user.type === "MANUFACTURER" && (
+                {type === AccountType.MANUFACTURER && (
                     <div className=" flex items-center ">
                         <AddProductDialog />
                     </div>
@@ -111,8 +111,8 @@ export default function AppHeader({ user }: { user: User }) {
            
                 <div className="flex items-center">
                     <Avatar className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-12 lg:h-12">
-                        <AvatarImage src={user?.image || "https://github.com/shadcn.png"} />
-                        <AvatarFallback className="text-xs sm:text-sm">{user?.name?.charAt(0)}</AvatarFallback>
+                        <AvatarImage src={image || "https://github.com/shadcn.png"} />
+                        <AvatarFallback className="text-xs sm:text-sm">{name?.charAt(0)}</AvatarFallback>
                     </Avatar>
                     
                 </div>

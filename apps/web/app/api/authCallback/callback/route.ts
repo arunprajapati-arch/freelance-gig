@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
 
         if (!session) {
             // No session, redirect to login
-            return NextResponse.redirect(new URL('/login', req.url));
+            return NextResponse.redirect(new URL('/signin', req.url));
         }
 
         // Check if user is onboarded by verifying if they have a username

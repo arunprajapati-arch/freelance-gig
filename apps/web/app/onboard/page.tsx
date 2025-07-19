@@ -10,17 +10,17 @@ export default async function Page() {
         headers: await headers()
     })
 
-    // if(!session) {
-    //     redirect("/login");
-    // }
+    if(!session) {
+        redirect("/signin");
+    }
 
     // Check if user is already onboarded (has username)
-    // const isOnboarded = session.user.username && session.user.username.length > 0;
+    const isOnboarded = session.user.username && session.user.username.length > 0;
     
-    // if(isOnboarded) {
-    //     // User is already onboarded, redirect to home
-    //     redirect("/home");
-    // }
+    if(isOnboarded) {
+        // User is already onboarded, redirect to home
+        redirect("/home");
+    }
 
     return(
         <div className="flex flex-col  md:gap-4  md:min-h-screen  bg-gradient-to-b from-rose-900 to-rose-950 md:p-4 md:px-8">

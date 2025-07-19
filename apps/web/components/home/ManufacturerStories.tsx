@@ -78,41 +78,7 @@ export default function ManufacturerStories({ setSelectedManufacturer, manufactu
                 </CarouselItem>
               );
             })}
-              {manufacturers.map((manufacturer, index) => {
-              const isSelected = currentSelectedManufacturer === manufacturer.id.toString();
-              return (
-                <CarouselItem key={index} className="pl-2 md:pl-4 basis-auto">
-                  <div 
-                    onClick={() => handleManufacturerClick(manufacturer)} 
-                    className="flex-none text-center cursor-pointer"
-                  >
-                    <div className="relative mb-1">
-                      {/* Instagram-style gradient border */}
-                      <div className={`w-16 h-16 rounded-full p-0.5 transition-all duration-300 ${
-                        isSelected 
-                          ? 'bg-gradient-to-tr from-purple-500 via-red-500 to-yellow-500' 
-                          : 'bg-gradient-to-tr from-gray-300 to-gray-400'
-                      }`}>
-                        <div className="w-full h-full rounded-full bg-white p-0.5">
-                          <div className="w-full h-full rounded-full bg-gray-100 flex items-center justify-center overflow-hidden">
-                            <span className="text-lg font-bold text-gray-700">
-                              {manufacturer.name?.charAt(0)?.toUpperCase() || 'M'}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Name below */}
-                    <div className="w-16">
-                      <p className="text-xs text-gray-700 truncate font-medium">
-                        {manufacturer.name || 'Unknown'}
-                      </p>
-                    </div>
-                  </div>
-                </CarouselItem>
-              );
-            })}
+              
           </CarouselContent>
         </Carousel>
       </div>

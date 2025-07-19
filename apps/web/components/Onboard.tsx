@@ -1,10 +1,22 @@
 'use client';
 import { completeOnboarding } from "@/app/actions/onboard";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 
 export default function Onboard() {
   const [state, formAction] = useActionState(completeOnboarding,{success: false, message:""})
+  const router = useRouter();
+
+  // Redirect to home when onboarding is successful
+  useEffect(() => {
+    if (state.success) {
+      // Small delay to show success message briefly before redirecting
+      setTimeout(() => {
+        router.push("/home");
+      }, 1000);
+    }
+  }, [state.success, router]);
 
   return (
     <div className="bg-gradient-to-br from-stone-50 to-stone-100 h-dvh  md:h-[90vh] w-full md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 border border-stone-200 shadow-sm sm:shadow-md lg:shadow-lg">
@@ -98,6 +110,11 @@ export default function Onboard() {
                     : 'bg-gradient-to-b from-red-50 to-red-100 text-red-700 border border-red-200 shadow-red-900/10'
                 }`}>
                   {state.message}
+                  {state.success && (
+                    <div className="text-xs mt-1 opacity-75">
+                      Redirecting to home...
+                    </div>
+                  )}
                 </div>
               )}
 

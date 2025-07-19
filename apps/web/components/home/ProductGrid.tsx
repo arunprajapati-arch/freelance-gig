@@ -107,7 +107,7 @@ export default function ProductGrid({ manufacturer, products, loading, error }: 
             {gridProducts.map((product) => (
               <div
                 key={product.id}
-                className="group bg-white rounded-lg sm:rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer transform hover:-translate-y-1 h-[280px] sm:h-[320px] md:h-[380px] lg:h-[420px] border border-stone-200"
+                className="group bg-white rounded-lg sm:rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden  transform hover:-translate-y-1 h-[280px] sm:h-[320px] md:h-[380px] lg:h-[420px] border border-stone-200"
               >
                 <div className="relative w-full h-[55%] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
                   <Image
@@ -124,13 +124,14 @@ export default function ProductGrid({ manufacturer, products, loading, error }: 
                   </div>
 
                   {/* Heart Icon */}
-                  <div className="absolute top-1 right-1 sm:top-2 sm:right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {/* <div className="absolute top-1 right-1 sm:top-2 sm:right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <button className="p-1 sm:p-1.5 md:p-2 bg-white rounded-full shadow-lg hover:scale-110 transition-transform duration-200 cursor-pointer">
                       <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                       </svg>
                     </button>
-                  </div>
+                  </div> */}
+
                 </div>
                 
                 <div className="p-1.5 sm:p-2.5 md:p-3 lg:p-4 h-[45%] flex flex-col justify-between">
@@ -141,7 +142,13 @@ export default function ProductGrid({ manufacturer, products, loading, error }: 
                       style={{ backgroundColor: getColorBadge(product.color) }}
                       aria-label={`${product.color} color variant`}
                     />
+                     <button
+                      className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 border-gray-200 hover:border-gray-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 cursor-pointer"
+                      style={{ backgroundColor: getColorBadge(product.color) }}
+                      aria-label={`${product.color} color variant`}
+                    />
                   </div>
+                  
                   
                   <div className="flex-1">
                     <h3 className="text-xs sm:text-xs md:text-sm font-semibold text-gray-800 mb-0.5 sm:mb-1 line-clamp-1 group-hover:text-red-900 transition-colors duration-200">

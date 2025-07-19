@@ -17,6 +17,7 @@ async function main() {
   const manufacturers = await Promise.all([
     prisma.user.create({
       data: {
+        id: "m2ssnaBFlZq5IMqegoPt6tlhqWUn3Tm8",
         email: "arun@textilepro.com",
         name: "Arun Prajapati",
         username: "arunprajapati",
@@ -112,74 +113,65 @@ async function main() {
   // Create products for each manufacturer
   const products = [];
 
-  // Arun's products (Textile Pro)
-  const arunProducts = await Promise.all([
-    prisma.product.create({
+  // Generate 50 products for Arun Prajapati
+  const productTypes = ["TSHIRT", "JEANS", "SHIRT", "OTHER"];
+  const colors = ["RED", "GREEN", "BLUE", "YELLOW", "PURPLE", "ORANGE", "PINK", "BROWN"];
+  const productNames = [
+    "Premium Cotton T-Shirt", "Classic White Shirt", "Comfort Fit Jeans", "Sports T-Shirt", "Polo Shirt",
+    "Casual T-Shirt", "Formal Shirt", "Slim Fit Jeans", "Round Neck T-Shirt", "Button Down Shirt",
+    "Straight Leg Jeans", "V-Neck T-Shirt", "Oxford Shirt", "Bootcut Jeans", "Graphic T-Shirt",
+    "Flannel Shirt", "Skinny Jeans", "Long Sleeve T-Shirt", "Denim Shirt", "Wide Leg Jeans",
+    "Henley T-Shirt", "Linen Shirt", "Ripped Jeans", "Tank Top", "Checkered Shirt",
+    "High Waist Jeans", "Crop Top", "Striped Shirt", "Mom Jeans", "Oversized T-Shirt",
+    "Business Shirt", "Boyfriend Jeans", "Fitted T-Shirt", "Casual Shirt", "Distressed Jeans",
+    "Muscle T-Shirt", "Poplin Shirt", "Tapered Jeans", "Ringer T-Shirt", "Twill Shirt",
+    "Flare Jeans", "Raglan T-Shirt", "Chambray Shirt", "Cargo Jeans", "Tie-Dye T-Shirt",
+    "Corduroy Shirt", "Jeggings", "Baseball T-Shirt", "Flannel Shirt", "Black Jeans"
+  ];
+  
+  const descriptions = [
+    "100% organic cotton, comfortable fit, perfect for daily wear",
+    "Premium quality fabric, durable stitching, modern design",
+    "Soft and breathable material, ideal for all seasons",
+    "Professional look, wrinkle-free, machine washable",
+    "Trendy style, excellent fit, long-lasting quality",
+    "Casual wear essential, versatile design, great value",
+    "Moisture-wicking fabric, athletic fit, performance wear",
+    "Classic design, comfortable feel, timeless appeal",
+    "Contemporary style, premium finish, attention to detail",
+    "Everyday comfort, reliable quality, affordable price"
+  ];
+
+  const images = [
+    "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1583743089695-4b816a340f82?w=400&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=400&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1571945153237-4929e783af4a?w=400&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=400&h=400&fit=crop",
+    "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400&h=400&fit=crop"
+  ];
+
+  const arunProducts = [];
+  for (let i = 0; i < 50; i++) {
+    const product = await prisma.product.create({
       data: {
-        name: "Premium Cotton T-Shirt",
-        description: "100% organic cotton, comfortable fit, perfect for daily wear",
-        price: 899,
-        color: "BLUE",
-        image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop",
-        type: "TSHIRT",
+        name: productNames[i % productNames.length] + ` ${Math.floor(i / productNames.length) + 1}`,
+        description: descriptions[i % descriptions.length],
+        price: Math.floor(Math.random() * 2000) + 500, // Random price between 500-2500
+        color: colors[i % colors.length],
+        image: images[i % images.length],
+        type: productTypes[i % productTypes.length],
         userId: manufacturers[0].id,
-        createdAt: new Date("2024-03-10"),
-        updatedAt: new Date("2024-03-10"),
+        createdAt: new Date(2024, 2, 10 + i), // March 10 + i days
+        updatedAt: new Date(2024, 2, 10 + i),
       },
-    }),
-    prisma.product.create({
-      data: {
-        name: "Classic White Shirt",
-        description: "Formal cotton shirt, wrinkle-free, professional look",
-        price: 1299,
-        color: "BLUE",
-        image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&h=400&fit=crop",
-        type: "SHIRT",
-        userId: manufacturers[0].id,
-        createdAt: new Date("2024-03-12"),
-        updatedAt: new Date("2024-03-12"),
-      },
-    }),
-    prisma.product.create({
-      data: {
-        name: "Comfort Fit Jeans",
-        description: "Stretchable denim, modern fit, durable quality",
-        price: 1899,
-        color: "BLUE",
-        image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=400&fit=crop",
-        type: "JEANS",
-        userId: manufacturers[0].id,
-        createdAt: new Date("2024-03-15"),
-        updatedAt: new Date("2024-03-15"),
-      },
-    }),
-    prisma.product.create({
-      data: {
-        name: "Sports T-Shirt",
-        description: "Moisture-wicking fabric, athletic fit, breathable material",
-        price: 699,
-        color: "RED",
-        image: "https://images.unsplash.com/photo-1583743089695-4b816a340f82?w=400&h=400&fit=crop",
-        type: "TSHIRT",
-        userId: manufacturers[0].id,
-        createdAt: new Date("2024-03-18"),
-        updatedAt: new Date("2024-03-18"),
-      },
-    }),
-    prisma.product.create({
-      data: {
-        name: "Polo Shirt",
-        description: "Classic polo design, cotton blend, collar design",
-        price: 999,
-        color: "GREEN",
-        image: "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=400&h=400&fit=crop",
-        type: "SHIRT",
-        userId: manufacturers[0].id,
-        createdAt: new Date("2024-03-20"),
-        updatedAt: new Date("2024-03-20"),
-      },
-    }),
-  ]);
+    });
+    arunProducts.push(product);
+  }
 
   // Priya's products (Fashion Craft)
   const priyaProducts = await Promise.all([
@@ -356,7 +348,7 @@ async function main() {
     prisma.savedProduct.create({
       data: {
         userId: clients[0].id,
-        productId: arunProducts[0].id, // Premium Cotton T-Shirt
+        productId: arunProducts[0].id, // First Arun product
       },
     }),
     prisma.savedProduct.create({
@@ -399,7 +391,7 @@ async function main() {
 
 🔑 Test accounts:
 Manufacturers:
-- arun@textilepro.com (Arun Prajapati) - 5 products
+- arun@textilepro.com (Arun Prajapati) - 50 products
 - priya@fashioncraft.com (Priya Sharma) - 3 products  
 - rajesh@urbanstyle.com (Rajesh Kumar) - 2 products
 - meera@silkweave.com (Meera Patel) - 1 product

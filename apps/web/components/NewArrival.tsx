@@ -78,7 +78,7 @@ export default function NewArrival({ manufacturer, products, loading, error }: N
                     <div className="flex flex-col items-center gap-0.5 sm:gap-1">
                       <div className="relative overflow-hidden rounded-md sm:rounded-lg group">
                         <Image 
-                          src={product.image || "/black-tshirt.png"}
+                          src={product.image === "random.jpg" ? "/black-tshirt.png" : product.image}
                           alt={product.name}
                           width={120} 
                           height={120} 

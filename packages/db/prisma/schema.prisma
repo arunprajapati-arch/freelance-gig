@@ -85,13 +85,27 @@ model Product {
   price       Int
   color       Color
   image       String
-  type        ProductType
   createdAt   DateTime
   updatedAt   DateTime
   userId      String
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   savedProducts SavedProduct[]
   @@map("product")
+}
+
+model MainProductType {
+  id Int @id @default(autoincrement())
+  name String
+  subProductType SubProductType[]
+  @@map("main_product_type")
+}
+
+model SubProductType {
+  id Int @id @default(autoincrement())
+  name String
+  mainProductType MainProductType @relation(fields: [mainProductTypeId], references: [id], onDelete: Cascade)
+  mainProductTypeId Int
+  @@map("sub_product_type")
 }
 
 model SavedProduct {
@@ -130,10 +144,5 @@ enum Color {
   BROWN
 }
 
-enum ProductType {
-  TSHIRT
-  JEANS
-  SHIRT
-  OTHER
-}
+
 
